@@ -48,7 +48,7 @@ const App = () => {
 
   return (
     <div className="todo-container">
-      <h1 className="todo-header">My Todos</h1>
+      <h1 className="todo-header">Todos</h1>
       <h1 className="create-task-heading">
         Create <span className="create-task-heading-subpart">Task</span>
       </h1>
