@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
+import "bootstrap/dist/css/bootstrap.css";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import './App.css'
 import TodoCard from "./components/TodoCard";
 
@@ -22,7 +25,7 @@ const App = () => {
   const checkableStatus = (status, todoId) => {
     setTodos(todos.map(item => {
       if (item.id === todoId) {
-        return {...item, isChecked: status}
+        return { ...item, isChecked: status }
       }
       return item
     }))
@@ -46,6 +49,14 @@ const App = () => {
     setTodos([])
   }
 
+  const renderSaveTooltip = props => {
+    return <Tooltip {...props}>Click here to save data in local storage</Tooltip>
+  }
+
+  const renderClearTooltip = props => {
+    return <Tooltip {...props}>Click here to clear data in local storage</Tooltip>
+  }
+
   return (
     <div className="todo-container">
       <h1 className="todo-header">Todos</h1>
@@ -63,8 +74,12 @@ const App = () => {
         })}
 
       </ul>
-      <button className="button" id="saveTodoButton" onClick={onSave}>Save</button>
-      <button className="button1" onClick={onClearStorage}>Clear</button>
+      <OverlayTrigger placement="top" overlay={renderSaveTooltip}>
+        <button className="button" onClick={onSave}>Save</button>
+      </OverlayTrigger>
+      <OverlayTrigger placement="top" overlay={renderClearTooltip}>
+        <button className="button1" onClick={onClearStorage}>Clear</button>
+      </OverlayTrigger>
     </div>
   )
 }
